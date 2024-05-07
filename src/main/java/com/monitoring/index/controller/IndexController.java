@@ -1,5 +1,9 @@
 package com.monitoring.index.controller;
 import com.monitoring.index.model.ExportOut;
+import com.monitoring.index.model.MetricsMode;
+import com.monitoring.index.model.ReportMode;
+import util.TxtConverter;
+import util.XmlConverter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -45,10 +49,11 @@ public class IndexController
         }
         for(File file :importFiles)
         {
-
+            ReportMode reportMode= TxtConverter.parseTxtData(file.getAbsolutePath(), MetricsMode.class, g0109Map);
+            XmlConverter.createXml(reportMode,exportFolder,reportMode.getRepCode());
         }
 
-        return null;
+        return ExportOut.builder().success(true).build();
     }
     public static List<File> getAllFiles(String importPath)
     {
