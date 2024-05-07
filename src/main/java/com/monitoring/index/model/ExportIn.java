@@ -1,5 +1,6 @@
 package com.monitoring.index.model;
 
+
 import lombok.Builder;
 import lombok.Data;
 
