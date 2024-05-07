@@ -3,6 +3,7 @@ package com.monitoring.index.model;
 import lombok.Data;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Grace
@@ -19,6 +20,6 @@ public class ReportMode
 	public String Unit;
 	public String Tabulator;
 	public String Principal;
-	public Map<Integer,Map<String,String>> resultMap;
+	public TreeMap<Integer,TreeMap<String,String>> resultMap;
 
 }
