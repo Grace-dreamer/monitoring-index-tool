@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2024/4/28 - 11:36
  */
 @Data
-public class metricsMode
+public class MetricsMode
 {
     private String RepCode;
     private String ReportDate;
