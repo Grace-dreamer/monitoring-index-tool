@@ -70,7 +70,7 @@ public class TxtConverter
 			throw new RuntimeException(e);
 		}
 
-		Map<Integer,Map<String,String>> result=parseLineNumber(map,rowMap);
+		TreeMap<Integer,TreeMap<String,String>> result=parseLineNumber(map,rowMap);
 		reportMode.setResultMap(result);
 		return reportMode;
 	}
@@ -81,9 +81,9 @@ public class TxtConverter
 		return result;
 	}
 	//将txt文件里map解析
-	public static Map<Integer,Map<String,String>> parseLineNumber(Map<String,String> map,Map<String,Integer> rowMap)
+	public static TreeMap<Integer,TreeMap<String,String>> parseLineNumber(Map<String,String> map,Map<String,Integer> rowMap)
 	{
-		Map<Integer,Map<String,String>> result = new TreeMap<>(new Comparator<Integer>() {
+		TreeMap<Integer,TreeMap<String,String>> result = new TreeMap<>(new Comparator<Integer>() {
 			@Override
 			public int compare(Integer k1, Integer k2) {
 				// 对于字符串key升序排序
@@ -94,7 +94,15 @@ public class TxtConverter
 		});
 
 		map.forEach((key,value)->{
-			Map<String,String> rowData=new HashMap<>();
+			TreeMap<String,String> rowData= new TreeMap<>(new Comparator<String>() {
+				@Override
+				public int compare(String k1, String k2) {
+					// 对于字符串key升序排序
+					return k1.compareTo(k2);
+					// 若需要降序排序，则可以改为
+					// return k2.compareTo(k1);
+				}
+			});
 			String[] keys=key.split(".");
 
 			//列
