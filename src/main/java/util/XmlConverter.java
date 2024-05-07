@@ -21,7 +21,7 @@ public class XmlConverter {
 	/**
 	 * 将list数据文件生成xml方法
 	 */
-	public static void createXml(ReportMode model){
+	public static void createXml(ReportMode model,String outPath,String fileName){
 		try {
 			// 1、创建document对象
 			Document document = DocumentHelper.createDocument();
@@ -51,39 +51,32 @@ public class XmlConverter {
 			for (Integer key : treeMap.keySet()) {
 				Element row = data.addElement("Row");
 				data.addAttribute("id", String.valueOf(key));
+				TreeMap<String,String> rowMap=treeMap.get(key);
+				for(String cellKey:rowMap.keySet())
+				{
+					Element cell = data.addElement("Cell");
+					cell.addAttribute("id",cellKey);
+					cell.setText(rowMap.get(cellKey));
+				}
 
 			}
 
-
-
-
-			/*map.forEach((key,value)->{
-				Element row = data.addElement("Row");
-				data.addAttribute("id", String.valueOf(key));
-
-			});*/
-
-			// 4、生成子节点及子节点内容
-			/*Element channel = cbrcReports.addElement("channel");
-			Element title = channel.addElement("title");
-			title.setText("国内最新新闻");*/
 			// 5、设置生成xml的格式
 			OutputFormat format = OutputFormat.createPrettyPrint();
 			// 设置编码格式
 			format.setEncoding("UTF-8");
-
-
 			// 6、生成xml文件
-			File file = new File("rss.xml");
+			File file = new File(outPath+"/"+fileName);
 			XMLWriter writer = new XMLWriter(new FileOutputStream(file), format);
 			// 设置是否转义，默认使用转义字符
 			writer.setEscapeText(false);
 			writer.write(document);
 			writer.close();
-			System.out.println("生成rss.xml成功");
+
+			System.out.println("生成"+model.getRepCode()+"xml成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("生成rss.xml失败");
+			System.out.println("生成"+model.getRepCode()+"xml失败");
 		}
 	}
 
