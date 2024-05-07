@@ -11,6 +11,7 @@ import org.dom4j.io.XMLWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -46,12 +47,21 @@ public class XmlConverter {
 
 			Element data = Report.addElement("Data");
 			data.addAttribute("part","");
-			Map<Integer,Map<String,String>> map=model.getResultMap();
+			TreeMap<Integer,Map<String,String>> treeMap=model.getResultMap();
+			for (Integer key : treeMap.keySet()) {
+				Element row = data.addElement("Row");
+				data.addAttribute("id", String.valueOf(key));
+
+			}
 
 
-			map.forEach((key,value)->{
 
-			});
+
+			/*map.forEach((key,value)->{
+				Element row = data.addElement("Row");
+				data.addAttribute("id", String.valueOf(key));
+
+			});*/
 
 			// 4、生成子节点及子节点内容
 			/*Element channel = cbrcReports.addElement("channel");
