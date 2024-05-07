@@ -5,7 +5,9 @@ import com.monitoring.index.model.ExportOut;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Grace
@@ -13,6 +15,22 @@ import java.util.List;
  */
 public class IndexController
 {
+    private static final Map<String, Integer> g0109Map;
+    static
+    {
+        g0109Map = new HashMap<String, Integer>();
+        g0109Map.put("G0109.1..", 7);
+        g0109Map.put("G0109.2..", 8);
+        g0109Map.put("G0109.3..", 9);
+        g0109Map.put("G0109.4..", 10);
+        g0109Map.put("G0109.5..", 11);
+        g0109Map.put("G0109.6..", 12);
+        g0109Map.put("G0109.7..", 13);
+        g0109Map.put("G0109.8..", 14);
+        g0109Map.put("G0109.9..", 15);
+        g0109Map.put("G0109.10..", 16);
+        g0109Map.put("G0109.11..", 17);
+    }
 
     //方法一：输入参数为指定文件夹，导出到指定文件夹
     public ExportOut export(ExportIn exportIn)
