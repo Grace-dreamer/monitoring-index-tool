@@ -15,6 +15,8 @@ import java.util.Map;
  */
 public class IndexController
 {
+    private String importFolder;
+    private String exportFolder;
     private static final Map<String, Integer> g0109Map;
     static
     {
@@ -33,10 +35,10 @@ public class IndexController
     }
 
     //方法一：输入参数为指定文件夹，导出到指定文件夹
-    public ExportOut export(ExportIn exportIn)
+    public ExportOut export(String importFolder,String exportFolder)
     {
         //获取目标文件路径下所有的txt文件
-         List<File> importFiles = getAllFiles(exportIn.getImportFolder());
+         List<File> importFiles = getAllFiles(importFolder);
         //总共多少个excel文件
         int n = importFiles.size();
         if (n < 1)
