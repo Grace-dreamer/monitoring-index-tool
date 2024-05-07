@@ -47,7 +47,7 @@ public class XmlConverter {
 
 			Element data = Report.addElement("Data");
 			data.addAttribute("part","");
-			TreeMap<Integer,Map<String,String>> treeMap=model.getResultMap();
+			TreeMap<Integer,TreeMap<String,String>> treeMap=model.getResultMap();
 			for (Integer key : treeMap.keySet()) {
 				Element row = data.addElement("Row");
 				data.addAttribute("id", String.valueOf(key));
