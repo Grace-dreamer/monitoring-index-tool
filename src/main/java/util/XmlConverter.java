@@ -1,45 +1,81 @@
 package util;
 
-import java.util.List;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import com.monitoring.index.model.TCdTableDataVo;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+
+import com.monitoring.index.model.ReportMode;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class XmlConverter {
-	public static String convertListToXml(List<TCdTableDataVo> list) {
+
+	/**
+	 * 将list数据文件生成xml方法
+	 */
+	public static void createXml(ReportMode model){
 		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.newDocument();
+			// 1、创建document对象
+			Document document = DocumentHelper.createDocument();
+			// 2、创建根节点rss
+			Element cbrcReports = document.addElement("CbrcReports");
+			// 3、向cbrcReports节点添加xmlns属性
+			cbrcReports.addAttribute("xmlns", "http://www.cbrc.gov.cn/report/1104");
+			Element Report = cbrcReports.addElement("Report");
+			Report.addAttribute("Report","");
+			Report.addAttribute("VersionId","");
+			Report.addAttribute("ReportDate","");
+			Report.addAttribute("Range","");
+			Report.addAttribute("Currency","");
+			Report.addAttribute("Unit","");
 
-			Element rootElement = document.createElement("Students");
-			document.appendChild(rootElement);
+			Element info = Report.addElement("info");
+			Element tabulator=info.addElement("Tabulator");
+			tabulator.setText("");
+			Element auditor=info.addElement("Auditor");
+			auditor.setText("");
+			Element principal=info.addElement("Principal");
+			principal.setText("");
 
-			for (TCdTableDataVo student : list) {
-				Element studentElement = document.createElement("Student");
-				rootElement.appendChild(studentElement);
+			Element data = Report.addElement("Data");
+			data.addAttribute("part","");
+			Map<Integer,Map<String,String>> map=model.getResultMap();
 
-				Element nameElement = document.createElement("orgName");
-				nameElement.appendChild(document.createTextNode(student.getOrgName()));
-				studentElement.appendChild(nameElement);
 
-				Element ageElement = document.createElement("orgNo");
-				ageElement.appendChild(document.createTextNode(String.valueOf(student.getOrgNo())));
-				studentElement.appendChild(ageElement);
-			}
+			map.forEach((key,value)->{
 
-			return documentToString(document);
+			});
+
+			// 4、生成子节点及子节点内容
+			/*Element channel = cbrcReports.addElement("channel");
+			Element title = channel.addElement("title");
+			title.setText("国内最新新闻");*/
+			// 5、设置生成xml的格式
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			// 设置编码格式
+			format.setEncoding("UTF-8");
+
+
+			// 6、生成xml文件
+			File file = new File("rss.xml");
+			XMLWriter writer = new XMLWriter(new FileOutputStream(file), format);
+			// 设置是否转义，默认使用转义字符
+			writer.setEscapeText(false);
+			writer.write(document);
+			writer.close();
+			System.out.println("生成rss.xml成功");
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("生成rss.xml失败");
 		}
-
-		return null;
 	}
 
-	private static String documentToString(Document document) {
-		// 在这里将Document对象转换成字符串并返回
-		return document.toString();
-	}
+
 }
