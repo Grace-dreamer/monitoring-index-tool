@@ -2,6 +2,7 @@ package com.monitoring.index.controller;
 import com.monitoring.index.model.ExportOut;
 import com.monitoring.index.model.MetricsMode;
 import com.monitoring.index.model.ReportMode;
+import lombok.Value;
 import util.TxtConverter;
 import util.XmlConverter;
 
@@ -17,8 +18,9 @@ import java.util.Map;
  */
 public class IndexController
 {
-    private String importFolder;
-    private String exportFolder;
+
+    private String importFolder="D:\\测试文件夹\\monitor";
+    private String exportFolder="D:\\测试文件夹\\monitor";
     private static final Map<String, Integer> g0109Map;
     static
     {
@@ -37,7 +39,7 @@ public class IndexController
     }
 
     //方法一：输入参数为指定文件夹，导出到指定文件夹
-    public ExportOut export(String importFolder,String exportFolder)
+    public ExportOut export()
     {
         //获取目标文件路径下所有的txt文件
          List<File> importFiles = getAllFiles(importFolder);
