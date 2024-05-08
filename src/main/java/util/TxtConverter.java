@@ -31,7 +31,7 @@ public class TxtConverter
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				String[] fieldArray=getArray(line);
+				String[] fieldArray=line.split(SOH_DELIMITER);
 				T t=clazz.newInstance();
 				//获取clazz类上的属性
 				Field[] fields = clazz.getDeclaredFields();
@@ -76,12 +76,7 @@ public class TxtConverter
 		reportMode.setResultMap(result);
 		return reportMode;
 	}
-   //将TXT文件 行数据按SOH间隔符分割
-	public static String[] getArray(String line)
-	{
-		String[] result = line.split(SOH_DELIMITER);
-		return result;
-	}
+
 	//将txt文件里map解析
 	public static TreeMap<Integer,TreeMap<String,String>> parseLineNumber(Map<String,String> map,Map<String,Integer> rowMap)
 	{
