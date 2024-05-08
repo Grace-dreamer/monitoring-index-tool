@@ -50,11 +50,11 @@ public class XmlConverter {
 			TreeMap<Integer,TreeMap<String,String>> treeMap=model.getResultMap();
 			for (Integer key : treeMap.keySet()) {
 				Element row = data.addElement("Row");
-				data.addAttribute("id", String.valueOf(key));
+				row.addAttribute("id", String.valueOf(key));
 				TreeMap<String,String> rowMap=treeMap.get(key);
 				for(String cellKey:rowMap.keySet())
 				{
-					Element cell = data.addElement("Cell");
+					Element cell = row.addElement("Cell");
 					cell.addAttribute("id",cellKey);
 					cell.setText(rowMap.get(cellKey));
 				}
