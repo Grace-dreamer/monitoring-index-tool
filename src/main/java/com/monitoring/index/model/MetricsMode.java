@@ -10,15 +10,15 @@ import lombok.Data;
 @Data
 public class MetricsMode
 {
-    private String RepCode;
-    private String ReportDate;
-    private String VersionId;
-    private String Range;
-    private String Currency;
-    private String Unit;
+    public String RepCode;
+    public String ReportDate;
+    public String VersionId;
+    public String Range;
+    public String Currency;
+    public String Unit;
     @ExportProperty(index = 7)
-    private String metricsCode;
+    public String metricsCode;
     @ExportProperty(index = 11)
-    private String metricsValue;
+    public String metricsValue;
 
 }
