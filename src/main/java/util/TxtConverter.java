@@ -18,7 +18,9 @@ import java.util.TreeMap;
  */
 public class TxtConverter
 {
-	private static final String SOH_DELIMITER = "\u0001";
+	//private static final String SOH_DELIMITER = "\u0001";
+	private static final String SOH_DELIMITER = "\\|";
+
 
 	//解析TXT数据文件
 	public static <T> ReportMode parseTxtData(String filePath, Class<T> clazz, Map<String,Integer> rowMap)
@@ -103,11 +105,11 @@ public class TxtConverter
 					// return k2.compareTo(k1);
 				}
 			});
-			String[] keys=key.split(".");
+			String[] keys=key.split("\\.");
 
 			//列
 			String column=keys[keys.length-1];
-			String rowKey=keys[0]+"."+keys[1]+"."+keys[2];
+			String rowKey=key.replace(column,"");
 			//行
 			Integer row=rowMap.get(rowKey);
 			rowData.put(column,value);
