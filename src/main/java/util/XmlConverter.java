@@ -10,11 +10,9 @@ import org.dom4j.io.XMLWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
+
 import java.util.TreeMap;
-import java.util.stream.Collectors;
+
 
 public class XmlConverter {
 
