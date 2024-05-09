@@ -52,6 +52,7 @@ public class IndexController
         for(File file :importFiles)
         {
             ReportMode reportMode= TxtConverter.parseTxtData(file.getAbsolutePath(), MetricsMode.class, g0109Map);
+            reportMode.setFileName(file.getName());
             XmlConverter.createXml(reportMode,exportFolder,reportMode.getRepCode());
         }
 

@@ -2,7 +2,6 @@ package com.monitoring.index.model;
 
 import lombok.Data;
 
-import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -12,14 +11,16 @@ import java.util.TreeMap;
 @Data
 public class ReportMode
 {
-	public String RepCode;
-	public String VersionId;
-	public String ReportDate;
-	public String Range;
-	public String Currency;
-	public String Unit;
-	public String Tabulator;
-	public String Principal;
+	public String repCode;
+	public String versionId;
+	public String reportDate;
+	public String range;
+	public String currency;
+	public String unit;
+	public String tabulator;
+	public String principal;
+
+	public String fileName;
 	public TreeMap<Integer,TreeMap<String,String>> resultMap;
 
 }
