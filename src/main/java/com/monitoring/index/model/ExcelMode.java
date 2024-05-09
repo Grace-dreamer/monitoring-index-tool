@@ -13,8 +13,9 @@ import com.alibaba.excel.annotation.ExcelProperty;
 public class ExcelMode
 {
     @ExcelProperty(index = 0)
-    private String metricsCode;
+    private String orderNumber;
     @ExcelProperty(index = 1)
+    private String metrics;
     private String rowNumber;
 
 }
